@@ -9,7 +9,7 @@ Feature: Search functionality on Amazon
 
   Scenario: Search for a product and validate search results
     When I search for a product "laptop"
-    Then I should see search results containing the keyword "laptop"
+    Then The keyword "laptop" should be at the top of the search results
     And the total number of results should be displayed
 #
 #  Scenario: Verify sorting options in search results

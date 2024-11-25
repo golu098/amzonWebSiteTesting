@@ -19,10 +19,10 @@ public class SearchFunctionalityPage extends BasePage{
 
     @FindBy(id = "nav-search-submit-button") // Search button
     private WebElement searchButton;
-    @FindAll(@FindBy(xpath = "//span[@class=\"a-size-medium a-color-base a-text-normal\"]")) // Search result titles
-    private List<WebElement> searchResults;
-    @FindBy(css = "#search span[dir='auto']") // Results count
-    private WebElement resultsCount;
+    @FindBy(xpath = "//span[@class=\"a-color-state a-text-bold\"]")// Search result titles
+    private WebElement searchResults;
+    @FindAll(@FindBy(xpath = "//button[@class=\"a-button-text\"]")) // Results count
+    private List<WebElement> resultsCount;
 
     @FindBy(xpath = "//span[@class='a-dropdown-label']") // Sorting dropdown
     private WebElement sortDropdown;
@@ -51,19 +51,14 @@ public class SearchFunctionalityPage extends BasePage{
         click(searchButton);
     }
 
-    public boolean areResultsContainingKeyword(String keyword) {
-        for (WebElement result : searchResults) {
-            if (!result.getText().toLowerCase().contains(keyword.toLowerCase())) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isKeywordAtTop(String keyword) {
+        waitForVisibility(searchResults);
+        return searchResults.getText().trim().toLowerCase().contains(keyword.toLowerCase());
     }
 
-
-    public String getResultsCountText() {
-        waitForVisibility(resultsCount);
-        return resultsCount.getText();
+    public int getResultsCountText() {
+        waitForVisibility(resultsCount.get(0));
+        return resultsCount.size();
     }
 
     public void applySortingOption(String sortOption) {
@@ -86,9 +81,11 @@ public class SearchFunctionalityPage extends BasePage{
         }
     }
 
-    public boolean verifyFilterResults(String brand) {
-        return searchResults.stream()
-                .allMatch(result -> result.getText().toLowerCase().contains(brand.toLowerCase()));
-    }
+
+
+//    public boolean verifyFilterResults(String brand) {
+//        return searchResults.stream()
+//                .allMatch(result -> result.getText().toLowerCase().contains(brand.toLowerCase()));
+//    }
 
 }

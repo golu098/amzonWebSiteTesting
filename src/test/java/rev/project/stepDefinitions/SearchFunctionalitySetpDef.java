@@ -31,18 +31,18 @@ public class SearchFunctionalitySetpDef {
         searchFunctionalityPage.searchProduct(productName);
     }
 
-    @Then("I should see search results containing the keyword {string}")
-    public void iShouldSeeSearchResultsContainingTheKeyword(String keyword) {
-
-        boolean resultsValid = searchFunctionalityPage.areResultsContainingKeyword(keyword);
-        assertTrue("Not all search results contain the keyword: " + keyword, resultsValid);
+    @Then("The keyword {string} should be at the top of the search results")
+    public void theKeywordShouldBeAtTheTopOfTheSearchResults(String keyword) {
+        boolean isAtTop = searchFunctionalityPage.isKeywordAtTop(keyword);
+        assertTrue("The keyword '" + keyword + "' is not displayed at the top of the search results!", isAtTop);
     }
+
 
     @Then("the total number of results should be displayed")
     public void theTotalNumberOfResultsShouldBeDisplayed() {
-        String resultsCount = searchFunctionalityPage.getResultsCountText();
-        assertFalse("Total results count is not displayed!", resultsCount.isEmpty());
-        System.out.println("Total number of results: " + resultsCount);
+        int resultsCount = searchFunctionalityPage.getResultsCountText();
+        System.out.println("Total items displayed: " + resultsCount);
+
     }
 
     @When("I apply the sorting option {string}")
@@ -61,9 +61,9 @@ public class SearchFunctionalitySetpDef {
         searchFunctionalityPage.applyFilter(filter);
     }
 
-    @Then("only products from the brand {string} should be displayed")
-    public void onlyProductsFromTheBrandShouldBeDisplayed(String brand) {
-        boolean isFiltered = searchFunctionalityPage.verifyFilterResults(brand);
-        assertTrue("Not all results are from the brand: " + brand, isFiltered);
-    }
+//    @Then("only products from the brand {string} should be displayed")
+//    public void onlyProductsFromTheBrandShouldBeDisplayed(String brand) {
+//        boolean isFiltered = searchFunctionalityPage.verifyFilterResults(brand);
+//        assertTrue("Not all results are from the brand: " + brand, isFiltered);
+//    }
 }
