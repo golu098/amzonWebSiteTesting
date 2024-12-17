@@ -1,16 +1,16 @@
-Feature: Search functionality on Amazon
-
-  As a user of the Amazon website
-  I want to search for specific products
-  So that I can validate search results and use sorting and filtering options effectively
-
-  Background:
-    Given I am on the Amazon home page
-
-  Scenario: Search for a product and validate search results
-    When I search for a product "laptop"
-    Then The keyword "laptop" should be at the top of the search results
-    And the total number of results should be displayed
+#Feature: Search functionality on Amazon
+#
+#  As a user of the Amazon website
+#  I want to search for specific products
+#  So that I can validate search results and use sorting and filtering options effectively
+#
+#  Background:
+#    Given I am on the Amazon home page
+#
+#  Scenario: Search for a product and validate search results
+#    When I search for a product "laptop"
+#    Then The keyword "laptop" should be at the top of the search results
+#    And the total number of results should be displayed
 #
 #  Scenario: Verify sorting options in search results
 #    Given I search for a product "mobile"

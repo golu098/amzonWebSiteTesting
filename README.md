@@ -31,16 +31,16 @@ The project also includes advanced test scenarios such as handling dropdowns, pe
 The following features of the Amazon website are tested in this project:
 
 ### **Basic Functionalities**
-1. **Home Page**
+1. **Home Page** 
    - Verify homepage load successfully.
    - Validate the presence of critical elements like the search bar, cart icon, and account menu.
 
-2. **Search Functionality**
+2. **Search Functionality** 
    - Search for specific products (e.g., "laptop", "mobile").
    - Validate that search results are displayed correctly.
    - Verify sorting and filtering options.
 
-3. **Product Details Page**
+3. **Product Details Page** 
    - Click on a product and verify the product details page.
    - Validate details like product name, price, availability, and reviews.
 
@@ -58,7 +58,7 @@ The following features of the Amazon website are tested in this project:
    - Use Selenium’s `Select` class for validation.
 
 ### **Advanced Functionalities**
-1. **Actions Class**
+1. **Actions Class** 
    - Perform mouse hover over menus.
    - Test drag-and-drop functionality.
 
@@ -66,19 +66,19 @@ The following features of the Amazon website are tested in this project:
    - Scroll to specific elements.
    - Perform clicks on hidden elements using JS Executor.
 
-3. **Checkbox and Radio Button**
+3. **Checkbox and Radio Button** 
    - Verify selection and de-selection of checkboxes and radio buttons.
 
 4. **Broken Links**
    - Detect and validate broken links on pages.
 
-5. **Parallel Testing**
+5. **Parallel Testing** 
    - Run tests simultaneously across multiple browsers to save execution time.
 
-6. **Cross-Browser Testing**
+6. **Cross-Browser Testing** 
    - Validate compatibility across Chrome, Firefox, Edge, and Safari.
 
-7. **Screenshots for Failed Tests**
+7. **Screenshots for Failed Tests**  
    - Capture screenshots for failed tests automatically for debugging purposes.
 
 ---

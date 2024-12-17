@@ -11,38 +11,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SearchFunctionalityPage extends BasePage{
+public class SearchFunctionalityPage extends BasePage {
+
     WebDriver driver;
 
-    @FindBy(xpath="//input[@id=\"twotabsearchtextbox\"]")
+    @FindBy(xpath="//input[@id='twotabsearchtextbox']")
     private WebElement searchBar;
 
-    @FindBy(id = "nav-search-submit-button") // Search button
+    @FindBy(id = "nav-search-submit-button")
     private WebElement searchButton;
-    @FindBy(xpath = "//span[@class=\"a-color-state a-text-bold\"]")// Search result titles
+
+    @FindBy(xpath = "//span[@class='a-color-state a-text-bold']")
     private WebElement searchResults;
-    @FindAll(@FindBy(xpath = "//button[@class=\"a-button-text\"]")) // Results count
+
+    @FindAll(@FindBy(xpath = "//span[@class='a-size-medium a-color-base a-text-normal']"))
+    private List<WebElement> searchResultsList;
+
+    @FindAll(@FindBy(xpath = "//button[@class='a-button-text']"))
     private List<WebElement> resultsCount;
 
-    @FindBy(xpath = "//span[@class='a-dropdown-label']") // Sorting dropdown
+    @FindBy(xpath = "//span[@class='a-dropdown-label']")
     private WebElement sortDropdown;
 
-    @FindBy(xpath = "//li[@aria-label='Price: Low to High']") // Sorting option
+    @FindBy(xpath = "//a[.=\"Price: Low to High\"]")
     private WebElement lowToHighOption;
 
-    @FindAll(@FindBy(css = ".a-price-whole")) // Prices of products
+    @FindAll(@FindBy(xpath = "//span[@class=\"a-price-whole\"]"))
     private List<WebElement> productPrices;
 
-    @FindBy(xpath = "//span[contains(text(),'HP') and @class='a-size-base']") // Brand filter
+    @FindBy(xpath = "//*[@id=\"p_123/308445\"]/span/a/span")
     private WebElement brandFilter;
 
     public SearchFunctionalityPage(WebDriver driver) {
-        super(driver); // Call the parent constructor
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     public void homePage() {
-        String url= ConfigUtils.accessUrl("homepage.url");
+        String url = ConfigUtils.accessUrl("homepage.url");
         driver.get(url);
     }
 
@@ -63,7 +70,7 @@ public class SearchFunctionalityPage extends BasePage{
 
     public void applySortingOption(String sortOption) {
         click(sortDropdown);
-        if (sortOption.equalsIgnoreCase("Price: Low to High")) {
+        if ("Price: Low to High".equalsIgnoreCase(sortOption)) {
             click(lowToHighOption);
         }
     }
@@ -72,20 +79,18 @@ public class SearchFunctionalityPage extends BasePage{
         List<Integer> prices = productPrices.stream()
                 .map(price -> Integer.parseInt(price.getText().replace(",", "")))
                 .collect(Collectors.toList());
-        return IntStream.range(0, prices.size() - 1).allMatch(i -> prices.get(i) <= prices.get(i + 1));
+        return IntStream.range(0, prices.size() - 1)
+                .allMatch(i -> prices.get(i) <= prices.get(i + 1));
     }
 
     public void applyFilter(String filter) {
-        if (filter.equalsIgnoreCase("Brand: HP")) {
+        if ("Brand: HP".equalsIgnoreCase(filter)) {
             click(brandFilter);
         }
     }
 
-
-
-//    public boolean verifyFilterResults(String brand) {
-//        return searchResults.stream()
-//                .allMatch(result -> result.getText().toLowerCase().contains(brand.toLowerCase()));
-//    }
-
+    public boolean verifyFilterResults(String brand) {
+        return searchResultsList.stream()
+                .allMatch(result -> result.getText().toLowerCase().contains(brand.toLowerCase()));
+    }
 }

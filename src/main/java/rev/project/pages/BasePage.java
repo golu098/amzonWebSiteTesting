@@ -17,6 +17,9 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    protected BasePage() {
+    }
+
     protected void waitForVisibility(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
